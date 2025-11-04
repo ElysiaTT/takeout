@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF5F5">
+
+    <!-- 顶部横幅 -->
+    <LinearLayout
+        android:id="@+id/restaurantHeader"
+        android:layout_width="0dp"
+        android:layout_height="180dp"
+        android:orientation="vertical"
+        android:background="@drawable/chinese_header_bg"
+        android:padding="20dp"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🏮 中华小馆 🏮"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:shadowColor="#000000"
+            android:shadowRadius="5" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="匠心炒制 · 暖心到家"
+            android:textSize="16sp"
+            android:textColor="#FFD700" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="⭐ 4.8分"
+                android:textColor="#FFD700"
+                android:textSize="14sp"
+                android:layout_marginEnd="16dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🚚 30分钟送达"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:layout_marginEnd="16dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="💰 人均 ¥45"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- 分类和菜品区域 -->
+    <LinearLayout
+        android:id="@+id/contentArea"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/restaurantHeader"
+        app:layout_constraintBottom_toTopOf="@id/cartButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- 左侧分类导航 -->
+        <LinearLayout
+            android:id="@+id/categoryNav"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="#FFF0F0">
+
+            <TextView
+                android:id="@+id/catSignature"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="招牌推荐"
+                android:gravity="center"
+                android:textSize="14sp"
+                android:textColor="#FFFFFF"
+                android:background="#DC143C"
+                android:clickable="true" />
+
+            <TextView
+                android:id="@+id/catSpicy"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="川湘风味"
+                android:gravity="center"
+                android:textSize="14sp"
+                android:textColor="#666666"
+                android:clickable="true" />
+
+            <TextView
+                android:id="@+id/catMainDish"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="主食"
+                android:gravity="center"
+                android:textSize="14sp"
+                android:textColor="#666666"
+                android:clickable="true" />
+
+            <TextView
+                android:id="@+id/catSoup"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="汤羹"
+                android:gravity="center"
+                android:textSize="14sp"
+                android:textColor="#666666"
+                android:clickable="true" />
+
+            <TextView
+                android:id="@+id/catDrink"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="饮品"
+                android:gravity="center"
+                android:textSize="14sp"
+                android:textColor="#666666"
+                android:clickable="true" />
+        </LinearLayout>
+
+        <!-- 右侧菜品展示 -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/foodRecyclerView"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="8dp"
+            android:background="#FFFFFF" />
+    </LinearLayout>
+
+    <!-- 底部购物车 -->
+    <Button
+        android:id="@+id/cartButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="🛒 购物车 (0 items) - ¥0.00"
+        android:textSize="16sp"
+        android:padding="16dp"
+        android:backgroundTint="#DC143C"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

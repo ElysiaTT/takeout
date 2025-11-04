@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E6F3FF">
+
+    <!-- 顶部横幅 -->
+    <LinearLayout
+        android:id="@+id/restaurantHeader"
+        android:layout_width="0dp"
+        android:layout_height="180dp"
+        android:orientation="vertical"
+        android:background="@drawable/burger_header_bg"
+        android:padding="20dp"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="⚡ 闪电汉堡 ⚡"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:shadowColor="#000000"
+            android:shadowRadius="5" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="极速配送 · 爆汁体验"
+            android:textSize="16sp"
+            android:textColor="#FFD700" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="⭐ 4.7分"
+                android:textColor="#FFD700"
+                android:textSize="14sp"
+                android:layout_marginEnd="16dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🚚 15分钟送达"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:layout_marginEnd="16dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="💰 人均 ¥35"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- 分类和菜品区域 -->
+    <LinearLayout
+        android:id="@+id/contentArea"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/restaurantHeader"
+        app:layout_constraintBottom_toTopOf="@id/cartButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- 左侧分类导航 -->
+        <LinearLayout
+            android:id="@+id/categoryNav"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="#CCE6FF">
+
+            <TextView
+                android:id="@+id/catClassicBurger"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="经典汉堡"
+                android:gravity="center"
+                android:textSize="14sp"
+                android:textColor="#FFFFFF"
+                android:background="#1E90FF"
+                android:clickable="true" />
+
+            <TextView
+                android:id="@+id/catSpecialBurger"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="特制汉堡"
+                android:gravity="center"
+                android:textSize="14sp"
+                android:textColor="#666666"
+                android:clickable="true" />
+
+            <TextView
+                android:id="@+id/catSnacks"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="小食拼盘"
+                android:gravity="center"
+                android:textSize="14sp"
+                android:textColor="#666666"
+                android:clickable="true" />
+
+            <TextView
+                android:id="@+id/catShakes"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="奶昔冰沙"
+                android:gravity="center"
+                android:textSize="14sp"
+                android:textColor="#666666"
+                android:clickable="true" />
+        </LinearLayout>
+
+        <!-- 右侧菜品展示 -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/foodRecyclerView"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="8dp"
+            android:background="#FFFFFF" />
+    </LinearLayout>
+
+    <!-- 底部购物车 -->
+    <Button
+        android:id="@+id/cartButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="🛒 购物车 (0 items) - $0.00"
+        android:textSize="16sp"
+        android:padding="16dp"
+        android:backgroundTint="#1E90FF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

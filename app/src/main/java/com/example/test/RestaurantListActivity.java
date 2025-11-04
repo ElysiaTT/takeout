@@ -16,6 +16,7 @@ public class RestaurantListActivity extends AppCompatActivity {
     private CardView chineseRestaurantCard;
     private CardView italianRestaurantCard;
     private CardView burgerRestaurantCard;
+    private CardView dongyiRestaurantCard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +27,7 @@ public class RestaurantListActivity extends AppCompatActivity {
         chineseRestaurantCard = findViewById(R.id.chineseRestaurantCard);
         italianRestaurantCard = findViewById(R.id.italianRestaurantCard);
         burgerRestaurantCard = findViewById(R.id.burgerRestaurantCard);
+        dongyiRestaurantCard = findViewById(R.id.dongyiRestaurantCard);
 
         // 设置餐厅卡片点击事件
         chineseRestaurantCard.setOnClickListener(v -> {
@@ -40,6 +42,11 @@ public class RestaurantListActivity extends AppCompatActivity {
 
         burgerRestaurantCard.setOnClickListener(v -> {
             Intent intent = new Intent(RestaurantListActivity.this, BurgerRestaurantActivity.class);
+            startActivity(intent);
+        });
+
+        dongyiRestaurantCard.setOnClickListener(v -> {
+            Intent intent = new Intent(RestaurantListActivity.this, DongyiRestaurantActivity.class);
             startActivity(intent);
         });
 

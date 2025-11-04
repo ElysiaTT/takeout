@@ -212,6 +212,57 @@
                         android:layout_gravity="end" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
+
+            <!-- 东一食堂卡片 -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/dongyiRestaurantCard"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:background="#FF8C00"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🍜 东一食堂 🍜"
+                        android:textSize="28sp"
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFF"
+                        android:shadowColor="#000000"
+                        android:shadowRadius="3" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="地道美味 实惠到家"
+                        android:textSize="18sp"
+                        android:textColor="#FFD700" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🥘 招牌菜：香辣牛肉卤面"
+                        android:textSize="16sp"
+                        android:textColor="#FFFFFF"
+                        android:background="#CC6600"
+                        android:padding="8dp"
+                        android:layout_gravity="end" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
         </LinearLayout>
     </ScrollView>
 

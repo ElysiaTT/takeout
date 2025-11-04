@@ -31,11 +31,11 @@ public class UserManager {
     private void initDefaultUser() {
         // 创建一个默认用户用于测试
         this.currentUser = new User(
-                "user_12345",
-                "user_12345",
+                "wangbian",
+                "王扁",
                 "123456",
                 "13812341234",
-                "user12345@123.com"
+                "u202315588@hust.edu.cn"
         );
         this.isLoggedIn = true;
     }

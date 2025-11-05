@@ -68,7 +68,7 @@ public class CartActivity extends AppCompatActivity {
             checkoutButton.setEnabled(true);
         }
 
-        totalPriceText.setText(String.format(Locale.US, "¥%.2f", shoppingCart.getTotalPrice()));
+        totalPriceText.setText(String.format(Locale.getDefault(), "¥%.2f", shoppingCart.getTotalPrice()));
         cartAdapter.notifyDataSetChanged();
     }
 

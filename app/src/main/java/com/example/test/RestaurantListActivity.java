@@ -12,7 +12,6 @@ import androidx.cardview.widget.CardView;
 public class RestaurantListActivity extends AppCompatActivity {
 
     private EditText searchBar;
-    private Button filterButton;
     private CardView chineseRestaurantCard;
     private CardView italianRestaurantCard;
     private CardView burgerRestaurantCard;
@@ -43,14 +42,14 @@ public class RestaurantListActivity extends AppCompatActivity {
         burgerRestaurantCard.setOnClickListener(v -> {
             Intent intent = new Intent(RestaurantListActivity.this, BurgerRestaurantActivity.class);
             startActivity(intent);
-        });
+        }); // <-- 添加了这个 });
+
+
 
         dongyiRestaurantCard.setOnClickListener(v -> {
             Intent intent = new Intent(RestaurantListActivity.this, DongyiRestaurantActivity.class);
             startActivity(intent);
         });
-
-
 
         // 底部导航栏
         findViewById(R.id.navHome).setOnClickListener(v -> {

@@ -39,7 +39,7 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.FoodVi
         FoodItem item = foodItems.get(position);
         holder.nameText.setText(item.getName());
         holder.descriptionText.setText(item.getDescription());
-        holder.priceText.setText(String.format(Locale.US, "¥%.2f", item.getPrice()));
+        holder.priceText.setText(String.format(Locale.getDefault(), "¥%.2f", item.getPrice()));
         holder.addButton.setOnClickListener(v -> {
             if (listener != null) {
                 listener.onAddToCart(item);

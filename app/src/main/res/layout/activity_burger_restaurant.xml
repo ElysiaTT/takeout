@@ -25,8 +25,8 @@
             android:textSize="32sp"
             android:textStyle="bold"
             android:textColor="#FFFFFF"
-            android:shadowColor="#000000"
-            android:shadowRadius="5" />
+                android:shadowColor="#000000"
+                android:shadowRadius="5" />
 
         <TextView
             android:layout_width="wrap_content"

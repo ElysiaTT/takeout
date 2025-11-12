@@ -1,0 +1,110 @@
+[
+  {
+    "name": "北京烤鸭",
+    "description": "果木挂炉烤制，外皮酥香，肉质鲜嫩。搭配全套饼酱。",
+    "price": 128.00,
+    "category": "招牌推荐"
+  },
+  {
+    "name": "小笼汤包",
+    "description": "皮薄馅大，汤汁饱满，请小心烫口。",
+    "price": 25.00,
+    "category": "招牌推荐"
+  },
+  {
+    "name": "东坡肉",
+    "description": "肥而不腻，入口即化的经典杭州菜。",
+    "price": 68.00,
+    "category": "招牌推荐"
+  },
+  {
+    "name": "麻婆豆腐",
+    "description": "传统川味，麻辣鲜香，下饭神器。🌶️",
+    "price": 32.00,
+    "category": "川湘风味"
+  },
+  {
+    "name": "水煮鱼",
+    "description": "鲜嫩鱼片，麻辣鲜香，配菜丰富。🌶️🌶️",
+    "price": 88.00,
+    "category": "川湘风味"
+  },
+  {
+    "name": "剁椒鱼头",
+    "description": "湘菜名品，鲜辣开胃，鱼肉细嫩。🌶️🌶️",
+    "price": 98.00,
+    "category": "川湘风味"
+  },
+  {
+    "name": "宫保鸡丁",
+    "description": "酸甜微辣，鸡肉嫩滑，花生酥脆。",
+    "price": 38.00,
+    "category": "川湘风味"
+  },
+  {
+    "name": "扬州炒饭",
+    "description": "粒粒分明，配料丰富，色香味俱全。",
+    "price": 28.00,
+    "category": "主食"
+  },
+  {
+    "name": "担担面",
+    "description": "四川特色面食，麻辣鲜香。🌶️",
+    "price": 22.00,
+    "category": "主食"
+  },
+  {
+    "name": "馄饨",
+    "description": "皮薄馅嫩，汤清味美。",
+    "price": 20.00,
+    "category": "主食"
+  },
+  {
+    "name": "葱油拌面",
+    "description": "简单美味，葱香浓郁。",
+    "price": 18.00,
+    "category": "主食"
+  },
+  {
+    "name": "酸辣汤",
+    "description": "酸辣开胃，配料丰富。",
+    "price": 25.00,
+    "category": "汤羹"
+  },
+  {
+    "name": "西湖牛肉羹",
+    "description": "鲜嫩滑润，营养丰富。",
+    "price": 32.00,
+    "category": "汤羹"
+  },
+  {
+    "name": "银耳莲子羹",
+    "description": "清甜滋润，养生佳品。",
+    "price": 18.00,
+    "category": "汤羹"
+  },
+  {
+    "name": "酸梅汤",
+    "description": "传统饮品，酸甜开胃，消暑解渴。",
+    "price": 15.00,
+    "category": "饮品"
+  },
+  {
+    "name": "茉莉花茶",
+    "description": "清香淡雅，回味无穷。",
+    "price": 12.00,
+    "category": "饮品"
+  },
+  {
+    "name": "绿豆汤",
+    "description": "清凉解暑，营养丰富。",
+    "price": 10.00,
+    "category": "饮品"
+  },
+  {
+    "name": "豆浆",
+    "description": "传统早餐饮品，营养健康。",
+    "price": 8.00,
+    "category": "饮品"
+  }
+]

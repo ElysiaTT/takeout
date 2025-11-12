@@ -38,6 +38,11 @@
             android:name=".DongyiRestaurantActivity"
             android:exported="false"
             android:parentActivityName=".RestaurantListActivity" />
+        <!-- 搜索结果页面 -->
+        <activity
+            android:name=".SearchResultsActivity"
+            android:exported="false"
+            android:parentActivityName=".RestaurantListActivity" />
         <!-- 通用的MainActivity和购物车 -->
         <activity
             android:name=".MainActivity"

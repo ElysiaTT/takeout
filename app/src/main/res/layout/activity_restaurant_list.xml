@@ -27,7 +27,9 @@
             android:paddingEnd="16dp"
             android:background="@drawable/search_background"
             android:drawableStart="@android:drawable/ic_menu_search"
-            android:drawablePadding="8dp" />
+            android:drawablePadding="8dp"
+            android:imeOptions="actionSearch"
+            android:inputType="text" />
     </LinearLayout>
 
     <!-- 标题 -->

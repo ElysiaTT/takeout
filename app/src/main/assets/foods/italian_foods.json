@@ -1,0 +1,122 @@
+[
+  {
+    "name": "玛格丽特披萨",
+    "description": "番茄酱、马苏里拉芝士、新鲜罗勒叶，经典意式风味。",
+    "price": 68.00,
+    "category": "披萨"
+  },
+  {
+    "name": "至尊披萨",
+    "description": "番茄酱、马苏里拉芝士、意大利香肠、火腿、蘑菇、青椒、洋葱、黑橄榄。",
+    "price": 88.00,
+    "category": "披萨"
+  },
+  {
+    "name": "海鲜披萨",
+    "description": "番茄酱、马苏里拉芝士、虾仁、鱿鱼、贻贝，海鲜风味。",
+    "price": 98.00,
+    "category": "披萨"
+  },
+  {
+    "name": "素食披萨",
+    "description": "番茄酱、马苏里拉芝士、蘑菇、彩椒、洋葱、茄子、橄榄，素食者的选择。🥗",
+    "price": 78.00,
+    "category": "披萨"
+  },
+  {
+    "name": "芝士披萨",
+    "description": "多种芝士混合，浓郁拉丝，芝士爱好者必点。",
+    "price": 72.00,
+    "category": "披萨"
+  },
+  {
+    "name": "博洛尼亚肉酱面",
+    "description": "经典意式肉酱，搭配意大利面，口感丰富。",
+    "price": 58.00,
+    "category": "意面"
+  },
+  {
+    "name": "奶油蘑菇意面",
+    "description": "浓郁奶油酱，搭配新鲜蘑菇，口感醇厚。",
+    "price": 52.00,
+    "category": "意面"
+  },
+  {
+    "name": "海鲜意面",
+    "description": "番茄酱底，搭配多种海鲜，鲜香可口。",
+    "price": 68.00,
+    "category": "意面"
+  },
+  {
+    "name": "青酱意面",
+    "description": "新鲜罗勒青酱，搭配松子、帕玛森芝士，清新风味。",
+    "price": 56.00,
+    "category": "意面"
+  },
+  {
+    "name": "番茄海鲜意面",
+    "description": "酸甜番茄酱，搭配海鲜，开胃可口。",
+    "price": 65.00,
+    "category": "意面"
+  },
+  {
+    "name": "凯撒沙拉",
+    "description": "罗马生菜、烤面包丁、帕玛森芝士、凯撒酱。🥗",
+    "price": 38.00,
+    "category": "前菜沙拉"
+  },
+  {
+    "name": "田园沙拉",
+    "description": "混合生菜、番茄、黄瓜、洋葱、橄榄油、醋。🥗",
+    "price": 32.00,
+    "category": "前菜沙拉"
+  },
+  {
+    "name": "地中海沙拉",
+    "description": "混合蔬菜、橄榄、菲达奶酪、橄榄油。🥗",
+    "price": 36.00,
+    "category": "前菜沙拉"
+  },
+  {
+    "name": "提拉米苏",
+    "description": "经典意式甜点，咖啡酒浸泡手指饼干，马斯卡彭奶酪层。",
+    "price": 28.00,
+    "category": "甜品"
+  },
+  {
+    "name": "芝士蛋糕",
+    "description": "浓郁芝士蛋糕，口感绵密。🍰",
+    "price": 26.00,
+    "category": "甜品"
+  },
+  {
+    "name": "巧克力熔岩蛋糕",
+    "description": "外酥里嫩，巧克力流心。🍫",
+    "price": 32.00,
+    "category": "甜品"
+  },
+  {
+    "name": "意大利冰淇淋",
+    "description": "手工意式冰淇淋，多种口味可选。🍨",
+    "price": 18.00,
+    "category": "甜品"
+  },
+  {
+    "name": "红酒",
+    "description": "意大利进口红酒，醇厚浓郁。🍷",
+    "price": 198.00,
+    "category": "葡萄酒"
+  },
+  {
+    "name": "白葡萄酒",
+    "description": "清爽白葡萄酒，果香浓郁。🍷",
+    "price": 168.00,
+    "category": "葡萄酒"
+  },
+  {
+    "name": "气泡酒",
+    "description": "意大利气泡酒，庆祝佳品。🥂",
+    "price": 228.00,
+    "category": "葡萄酒"
+  }
+]

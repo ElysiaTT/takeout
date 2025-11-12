@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- 餐厅名称标签 -->
+        <TextView
+            android:id="@+id/restaurantNameText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="中华小馆"
+            android:textSize="12sp"
+            android:textColor="#FF9800"
+            android:background="#FFF3E0"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:layout_marginBottom="8dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- 菜品信息 -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <!-- 菜品名称 -->
+                <TextView
+                    android:id="@+id/foodNameText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="北京烤鸭"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="#333333" />
+
+                <!-- 分类 -->
+                <TextView
+                    android:id="@+id/categoryText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="招牌推荐"
+                    android:textSize="12sp"
+                    android:textColor="#999999"
+                    android:layout_marginTop="4dp" />
+
+                <!-- 菜品描述 -->
+                <TextView
+                    android:id="@+id/descriptionText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="果木挂炉烤制，外皮酥香，肉质鲜嫩"
+                    android:textSize="14sp"
+                    android:textColor="#666666"
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    android:layout_marginTop="8dp" />
+
+                <!-- 价格 -->
+                <TextView
+                    android:id="@+id/priceText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="¥128.00"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="#DC143C"
+                    android:layout_marginTop="8dp" />
+            </LinearLayout>
+
+            <!-- 添加按钮 -->
+            <Button
+                android:id="@+id/addButton"
+                android:layout_width="80dp"
+                android:layout_height="40dp"
+                android:text="添加"
+                android:textColor="#FFFFFF"
+                android:background="#FF9800"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="16dp" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

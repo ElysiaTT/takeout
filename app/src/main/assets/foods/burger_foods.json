@@ -1,0 +1,128 @@
+[
+  {
+    "name": "巨无霸汉堡",
+    "description": "双层牛肉饼，搭配特制酱料，口感丰富。",
+    "price": 38.00,
+    "category": "经典汉堡"
+  },
+  {
+    "name": "麦辣鸡腿堡",
+    "description": "酥脆鸡腿肉，搭配辣味调料，口感爽脆。🌶️",
+    "price": 30.00,
+    "category": "经典汉堡"
+  },
+  {
+    "name": "板烧鸡腿堡",
+    "description": "香煎鸡腿肉，搭配黑胡椒风味，鲜嫩多汁。",
+    "price": 35.00,
+    "category": "经典汉堡"
+  },
+  {
+    "name": "芝士汉堡",
+    "description": "单层牛肉饼，浓郁芝士，经典美式风味。",
+    "price": 28.00,
+    "category": "经典汉堡"
+  },
+  {
+    "name": "双层牛肉汉堡",
+    "description": "双层100%纯牛肉饼，搭配新鲜蔬菜和酱料。",
+    "price": 42.00,
+    "category": "经典汉堡"
+  },
+  {
+    "name": "鲜虾汉堡",
+    "description": "酥脆虾饼，搭配特制塔塔酱，海鲜风味。",
+    "price": 36.00,
+    "category": "特色汉堡"
+  },
+  {
+    "name": "素食汉堡",
+    "description": "植物蛋白肉饼，营养健康，口味丰富。🥗",
+    "price": 34.00,
+    "category": "特色汉堡"
+  },
+  {
+    "name": "辣味牛肉汉堡",
+    "description": "香辣牛肉饼，搭配墨西哥辣椒，重口味选择。🌶️🌶️",
+    "price": 40.00,
+    "category": "特色汉堡"
+  },
+  {
+    "name": "薯条(中)",
+    "description": "外酥里嫩，经典美式薯条。",
+    "price": 12.00,
+    "category": "小食"
+  },
+  {
+    "name": "薯条(大)",
+    "description": "超大份量，外酥里嫩。",
+    "price": 15.00,
+    "category": "小食"
+  },
+  {
+    "name": "麦辣鸡翅(4块)",
+    "description": "外酥里嫩，辣味十足。🌶️",
+    "price": 28.00,
+    "category": "小食"
+  },
+  {
+    "name": "麦乐鸡(5块)",
+    "description": "嫩滑鸡肉块，搭配多种蘸酱。",
+    "price": 22.00,
+    "category": "小食"
+  },
+  {
+    "name": "可乐(中)",
+    "description": "经典碳酸饮料，畅爽解渴。🥤",
+    "price": 9.00,
+    "category": "饮品"
+  },
+  {
+    "name": "可乐(大)",
+    "description": "大杯畅饮，清凉解暑。🥤",
+    "price": 12.00,
+    "category": "饮品"
+  },
+  {
+    "name": "雪碧(中)",
+    "description": "柠檬味碳酸饮料，清爽可口。🥤",
+    "price": 9.00,
+    "category": "饮品"
+  },
+  {
+    "name": "橙汁(中)",
+    "description": "新鲜橙汁，富含维生素。🥤",
+    "price": 15.00,
+    "category": "饮品"
+  },
+  {
+    "name": "香草奶昔",
+    "description": "浓郁香草口味奶昔，香甜可口，冰爽宜人。",
+    "price": 12.00,
+    "category": "奶昔冰沙"
+  },
+  {
+    "name": "巧克力奶昔",
+    "description": "丝滑巧克力奶昔，口感浓郁，巧克力爱好者的最爱。",
+    "price": 13.00,
+    "category": "奶昔冰沙"
+  },
+  {
+    "name": "草莓冰沙",
+    "description": "新鲜草莓制作的冰沙，酸甜可口，清凉解暑。",
+    "price": 14.00,
+    "category": "奶昔冰沙"
+  },
+  {
+    "name": "芒果冰沙",
+    "description": "热带芒果风味冰沙，果香浓郁，口感清爽。",
+    "price": 14.00,
+    "category": "奶昔冰沙"
+  },
+  {
+    "name": "蓝莓冰沙",
+    "description": "富含花青素的蓝莓冰沙，酸甜适中，营养健康。",
+    "price": 15.00,
+    "category": "奶昔冰沙"
+  }
+]

@@ -3,9 +3,11 @@ package com.example.test;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +26,7 @@ public class ChineseRestaurantActivity extends AppCompatActivity {
     private List<FoodItem> allFoodItems;
     private List<FoodItem> currentFoodItems;
     private ShoppingCart shoppingCart;
+    private FoodDatabaseHelper databaseHelper;
 
     private TextView catSignature, catSpicy, catMainDish, catSoup, catDrink;
     private TextView currentSelectedCategory;
@@ -34,6 +37,7 @@ public class ChineseRestaurantActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chinese_restaurant);
 
         shoppingCart = ShoppingCart.getInstance();
+        databaseHelper = new FoodDatabaseHelper(this);
 
         foodRecyclerView = findViewById(R.id.foodRecyclerView);
         cartButton = findViewById(R.id.cartButton);
@@ -62,83 +66,49 @@ public class ChineseRestaurantActivity extends AppCompatActivity {
     }
 
     private void setupFoodItems() {
-        allFoodItems = new ArrayList<>();
-
-        // 招牌推荐
-        FoodItem pekingDuck = new FoodItem("北京烤鸭",
-            "果木挂炉烤制，外皮酥香，肉质鲜嫩。搭配全套饼酱。",
-            128.00, "招牌推荐");
-        allFoodItems.add(pekingDuck);
-
-        allFoodItems.add(new FoodItem("小笼汤包",
-            "皮薄馅大，汤汁饱满，请小心烫口。",
-            25.00, "招牌推荐"));
-
-        allFoodItems.add(new FoodItem("东坡肉",
-            "肥而不腻，入口即化的经典杭州菜。",
-            68.00, "招牌推荐"));
-
-        // 川湘风味
-        allFoodItems.add(new FoodItem("麻婆豆腐",
-            "传统川味，麻辣鲜香，下饭神器。🌶️",
-            32.00, "川湘风味"));
-
-        allFoodItems.add(new FoodItem("水煮鱼",
-            "鲜嫩鱼片，麻辣鲜香，配菜丰富。🌶️🌶️",
-            88.00, "川湘风味"));
-
-        allFoodItems.add(new FoodItem("剁椒鱼头",
-            "湘菜名品，鲜辣开胃，鱼肉细嫩。🌶️🌶️",
-            98.00, "川湘风味"));
-
-        allFoodItems.add(new FoodItem("宫保鸡丁",
-            "酸甜微辣，鸡肉嫩滑，花生酥脆。",
-            38.00, "川湘风味"));
-
-        // 主食
-        allFoodItems.add(new FoodItem("扬州炒饭",
-            "粒粒分明，配料丰富，色香味俱全。",
-            28.00, "主食"));
-
-        allFoodItems.add(new FoodItem("担担面",
-            "四川特色面食，麻辣鲜香。🌶️",
-            22.00, "主食"));
-
-        allFoodItems.add(new FoodItem("馄饨",
-            "皮薄馅嫩，汤清味美。",
-            20.00, "主食"));
-
-        allFoodItems.add(new FoodItem("葱油拌面",
-            "简单美味，葱香浓郁。",
-            18.00, "主食"));
-
-        // 汤羹
-        allFoodItems.add(new FoodItem("酸辣汤",
-            "酸辣开胃，配料丰富。",
-            25.00, "汤羹"));
-
-        allFoodItems.add(new FoodItem("西湖牛肉羹",
-            "鲜嫩滑润，营养丰富。",
-            32.00, "汤羹"));
-
-        allFoodItems.add(new FoodItem("银耳莲子羹",
-            "清甜滋润，养生佳品。",
-            18.00, "汤羹"));
-
-        // 饮品
-        allFoodItems.add(new FoodItem("酸梅汤",
-            "消暑解渴，酸甜可口。",
-            12.00, "饮品"));
-
-        allFoodItems.add(new FoodItem("豆浆",
-            "现磨豆浆，营养健康。",
-            8.00, "饮品"));
-
-        allFoodItems.add(new FoodItem("菊花茶",
-            "清热降火，清香怡人。",
-            10.00, "饮品"));
-
-        currentFoodItems = new ArrayList<>(allFoodItems);
+        try {
+            // 从数据库获取所有菜品
+            Log.d("ChineseRestaurant", "Starting setupFoodItems()");
+            allFoodItems = databaseHelper.getAllFoodItems(FoodDatabaseHelper.TABLE_CHINESE_FOOD);
+            Log.d("ChineseRestaurant", "Total food items retrieved: " + (allFoodItems != null ? allFoodItems.size() : "null"));
+            
+            // 初始化currentFoodItems
+            currentFoodItems = new ArrayList<>();
+            
+            // 确保foodItemAdapter已初始化
+            if (foodItemAdapter == null) {
+                foodItemAdapter = new FoodItemAdapter(currentFoodItems, foodItem -> {
+                    shoppingCart.addItem(foodItem);
+                    Toast.makeText(ChineseRestaurantActivity.this,
+                        foodItem.getName() + " 已加入购物车！",
+                        Toast.LENGTH_SHORT).show();
+                    updateCartButton();
+                });
+                foodRecyclerView.setAdapter(foodItemAdapter);
+                Log.d("ChineseRestaurant", "Food adapter initialized");
+            }
+            
+            // 直接从数据库获取招牌推荐分类的菜品
+            Log.d("ChineseRestaurant", "Getting food items for category: 招牌推荐");
+            currentFoodItems = databaseHelper.getFoodItemsByCategory(FoodDatabaseHelper.TABLE_CHINESE_FOOD, "招牌推荐");
+            
+            // 确保currentFoodItems不为空
+            if (currentFoodItems == null) {
+                currentFoodItems = new ArrayList<>();
+                Log.d("ChineseRestaurant", "currentFoodItems initialized as empty list");
+            }
+            
+            Log.d("ChineseRestaurant", "Filtered items count: " + currentFoodItems.size());
+            
+            // 更新适配器数据
+            foodItemAdapter.updateData(currentFoodItems);
+            foodItemAdapter.notifyDataSetChanged();
+            Log.d("ChineseRestaurant", "Adapter data updated and notified");
+            
+        } catch (Exception e) {
+            Log.e("ChineseRestaurant", "Error setting up food items: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     private void setupRecyclerView() {
@@ -181,13 +151,35 @@ public class ChineseRestaurantActivity extends AppCompatActivity {
     }
 
     private void filterByCategory(String category) {
-        currentFoodItems.clear();
-        for (FoodItem item : allFoodItems) {
-            if (item.getCategory().equals(category)) {
-                currentFoodItems.add(item);
-            }
+        Log.d("ChineseRestaurant", "Filtering by category: " + category);
+        // 从数据库根据分类获取菜品
+        currentFoodItems = databaseHelper.getFoodItemsByCategory(FoodDatabaseHelper.TABLE_CHINESE_FOOD, category);
+        
+        // 确保currentFoodItems不为空
+        if (currentFoodItems == null) {
+            Log.d("ChineseRestaurant", "currentFoodItems initialized as empty list");
+            currentFoodItems = new ArrayList<>();
         }
-        foodItemAdapter.notifyDataSetChanged();
+        
+        Log.d("ChineseRestaurant", "Filtered items count: " + currentFoodItems.size());
+        
+        // 更新适配器数据并通知变化
+        if (foodItemAdapter != null) {
+            foodItemAdapter.updateData(currentFoodItems);
+            foodItemAdapter.notifyDataSetChanged();
+            Log.d("ChineseRestaurant", "Adapter data updated and notified");
+        } else {
+            Log.e("ChineseRestaurant", "foodItemAdapter is null");
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // 清理资源
+        if (databaseHelper != null) {
+            databaseHelper.close();
+        }
     }
 
     private void updateCategoryUI(TextView selectedCategory) {

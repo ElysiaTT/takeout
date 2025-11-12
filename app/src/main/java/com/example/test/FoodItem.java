@@ -6,6 +6,7 @@ public class FoodItem {
     private double price;
     private String category;
     private String imageUrl;
+    private String restaurantName; // 餐厅名称，用于搜索结果显示
 
     public FoodItem(String name, String description, double price, String category) {
         this.name = name;
@@ -13,6 +14,7 @@ public class FoodItem {
         this.price = price;
         this.category = category;
         this.imageUrl = "";
+        this.restaurantName = "";
     }
 
     public String getName() {
@@ -53,5 +55,13 @@ public class FoodItem {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public String getRestaurantName() {
+        return restaurantName;
+    }
+
+    public void setRestaurantName(String restaurantName) {
+        this.restaurantName = restaurantName;
     }
 }

@@ -3,14 +3,14 @@ package com.example.test;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -23,6 +23,7 @@ public class BurgerRestaurantActivity extends AppCompatActivity {
     private List<FoodItem> allFoodItems;
     private List<FoodItem> currentFoodItems;
     private ShoppingCart shoppingCart;
+    private FoodDatabaseHelper databaseHelper;
 
     private TextView catClassicBurger, catSpecialBurger, catSnacks, catShakes;
     private TextView currentSelectedCategory;
@@ -33,6 +34,7 @@ public class BurgerRestaurantActivity extends AppCompatActivity {
         setContentView(R.layout.activity_burger_restaurant);
 
         shoppingCart = ShoppingCart.getInstance();
+        databaseHelper = new FoodDatabaseHelper(this);
 
         foodRecyclerView = findViewById(R.id.foodRecyclerView);
         cartButton = findViewById(R.id.cartButton);
@@ -60,109 +62,78 @@ public class BurgerRestaurantActivity extends AppCompatActivity {
     }
 
     private void setupFoodItems() {
-        allFoodItems = new ArrayList<>();
-
-        // 经典汉堡
-        allFoodItems.add(new FoodItem("经典芝士牛肉汉堡 🏆",
-            "100%纯牛肉饼，搭配融化的车打芝士和新鲜蔬菜。",
-            32.00, "经典汉堡"));
-
-        allFoodItems.add(new FoodItem("双层牛肉汉堡",
-            "双倍牛肉饼，双倍满足感！",
-            45.00, "经典汉堡"));
-
-        allFoodItems.add(new FoodItem("培根汉堡",
-            "酥脆培根配多汁牛肉饼，绝配！",
-            38.00, "经典汉堡"));
-
-        allFoodItems.add(new FoodItem("鸡肉汉堡",
-            "炸鸡排配生菜番茄，清爽美味。",
-            28.00, "经典汉堡"));
-
-        // 特制汉堡
-        allFoodItems.add(new FoodItem("闪电特级汉堡",
-            "三层牛肉饼！芝士、培根、洋葱圈全都有！",
-            68.00, "特制汉堡"));
-
-        allFoodItems.add(new FoodItem("墨西哥辣堡",
-            "墨西哥辣椒、芝士、莎莎酱，火辣过瘾！🌶️🌶️",
-            42.00, "特制汉堡"));
-
-        allFoodItems.add(new FoodItem("蘑菇瑞士汉堡",
-            "蘑菇配瑞士芝士，口感浓郁。",
-            48.00, "特制汉堡"));
-
-        allFoodItems.add(new FoodItem("BBQ汉堡",
-            "BBQ酱配洋葱圈，美式风味十足。",
-            45.00, "特制汉堡"));
-
-        allFoodItems.add(new FoodItem("素食汉堡",
-            "植物肉饼，健康环保不失美味。",
-            38.00, "特制汉堡"));
-
-        // 小食拼盘
-        allFoodItems.add(new FoodItem("炸鸡桶",
-            "外皮酥脆，鸡肉鲜嫩多汁。6块装。",
-            48.00, "小食拼盘"));
-
-        allFoodItems.add(new FoodItem("鸡块拼盘",
-            "金黄酥脆的鸡块，配多种酱料。10块装。",
-            32.00, "小食拼盘"));
-
-        allFoodItems.add(new FoodItem("薯条（大份）",
-            "超大份金黄薯条，外酥内软。",
-            18.00, "小食拼盘"));
-
-        allFoodItems.add(new FoodItem("洋葱圈",
-            "香脆洋葱圈，停不下来的美味。",
-            22.00, "小食拼盘"));
-
-        allFoodItems.add(new FoodItem("鸡翅拼盘",
-            "烤鸡翅6只，配蜂蜜芥末酱。",
-            35.00, "小食拼盘"));
-
-        allFoodItems.add(new FoodItem("芝士薯条",
-            "薯条上淋满浓郁芝士酱。",
-            25.00, "小食拼盘"));
-
-        // 奶昔冰沙
-        allFoodItems.add(new FoodItem("巧克力奶昔 🏆",
-            "冰爽绵密，浓郁巧克力风味。",
-            22.00, "奶昔冰沙"));
-
-        allFoodItems.add(new FoodItem("香草奶昔",
-            "经典香草口味，清甜顺滑。",
-            20.00, "奶昔冰沙"));
-
-        allFoodItems.add(new FoodItem("草莓奶昔",
-            "新鲜草莓制作，果香浓郁。",
-            22.00, "奶昔冰沙"));
-
-        allFoodItems.add(new FoodItem("奥利奥奶昔",
-            "奥利奥饼干碎配冰淇淋，香甜可口。",
-            25.00, "奶昔冰沙"));
-
-        allFoodItems.add(new FoodItem("芒果冰沙",
-            "热带芒果风味，清凉解暑。",
-            20.00, "奶昔冰沙"));
-
-        allFoodItems.add(new FoodItem("可乐（大杯）",
-            "冰镇可口可乐，畅爽无比。",
-            12.00, "奶昔冰沙"));
-
-        currentFoodItems = new ArrayList<>(allFoodItems);
+        try {
+            Log.d("BurgerRestaurant", "Starting setupFoodItems()");
+            // 从数据库获取所有菜品
+            allFoodItems = databaseHelper.getAllFoodItems(FoodDatabaseHelper.TABLE_BURGER_FOOD);
+            Log.d("BurgerRestaurant", "Total food items retrieved: " + (allFoodItems != null ? allFoodItems.size() : "null"));
+            
+            // 初始化currentFoodItems
+            currentFoodItems = new ArrayList<>();
+            
+            // 确保foodItemAdapter已初始化
+            if (foodItemAdapter == null) {
+                setupRecyclerView();
+                Log.d("BurgerRestaurant", "Food adapter initialized");
+            }
+            
+            // 直接从数据库获取经典汉堡分类的菜品
+            Log.d("BurgerRestaurant", "Getting food items for category: 经典汉堡");
+            currentFoodItems = databaseHelper.getFoodItemsByCategory(FoodDatabaseHelper.TABLE_BURGER_FOOD, "经典汉堡");
+            
+            // 确保currentFoodItems不为空
+            if (currentFoodItems == null) {
+                currentFoodItems = new ArrayList<>();
+                Log.d("BurgerRestaurant", "currentFoodItems initialized as empty list");
+            }
+            
+            Log.d("BurgerRestaurant", "Filtered items count: " + currentFoodItems.size());
+            
+            // 更新适配器数据
+            if (foodItemAdapter != null) {
+                foodItemAdapter.updateData(currentFoodItems);
+                foodItemAdapter.notifyDataSetChanged();
+                Log.d("BurgerRestaurant", "Adapter data updated and notified");
+            }
+            
+        } catch (Exception e) {
+            Log.e("BurgerRestaurant", "Error setting up food items: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     private void setupRecyclerView() {
+        Log.d("BurgerRestaurant", "Setting up RecyclerView");
         foodRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        foodItemAdapter = new FoodItemAdapter(currentFoodItems, foodItem -> {
-            shoppingCart.addItem(foodItem);
-            Toast.makeText(BurgerRestaurantActivity.this,
-                foodItem.getName() + " 已加入购物车！",
-                Toast.LENGTH_SHORT).show();
-            updateCartButton();
+        
+        // 确保currentFoodItems不为空
+        if (currentFoodItems == null) {
+            currentFoodItems = new ArrayList<>();
+        }
+        
+        // 使用匿名内部类实现OnItemClickListener
+        foodItemAdapter = new FoodItemAdapter(currentFoodItems, new FoodItemAdapter.OnItemClickListener() {
+            @Override
+            public void onAddToCart(FoodItem foodItem) {
+                // 添加到购物车逻辑
+                shoppingCart.addItem(foodItem);
+                updateCartButton();
+                // 显示添加成功提示
+                Toast.makeText(BurgerRestaurantActivity.this, foodItem.getName() + " 已添加到购物车", Toast.LENGTH_SHORT).show();
+            }
         });
+        
         foodRecyclerView.setAdapter(foodItemAdapter);
+        Log.d("BurgerRestaurant", "RecyclerView setup completed");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // 清理资源
+        if (databaseHelper != null) {
+            databaseHelper.close();
+        }
     }
 
     private void setupCategoryNavigation() {
@@ -172,12 +143,12 @@ public class BurgerRestaurantActivity extends AppCompatActivity {
         });
 
         catSpecialBurger.setOnClickListener(v -> {
-            filterByCategory("特制汉堡");
+            filterByCategory("特色汉堡");
             updateCategoryUI(catSpecialBurger);
         });
 
         catSnacks.setOnClickListener(v -> {
-            filterByCategory("小食拼盘");
+            filterByCategory("小食");
             updateCategoryUI(catSnacks);
         });
 
@@ -188,13 +159,26 @@ public class BurgerRestaurantActivity extends AppCompatActivity {
     }
 
     private void filterByCategory(String category) {
-        currentFoodItems.clear();
-        for (FoodItem item : allFoodItems) {
-            if (item.getCategory().equals(category)) {
-                currentFoodItems.add(item);
-            }
+        Log.d("BurgerRestaurant", "Filtering by category: " + category);
+        // 从数据库根据分类获取菜品
+        currentFoodItems = databaseHelper.getFoodItemsByCategory(FoodDatabaseHelper.TABLE_BURGER_FOOD, category);
+        
+        // 确保currentFoodItems不为空
+        if (currentFoodItems == null) {
+            currentFoodItems = new ArrayList<>();
+            Log.d("BurgerRestaurant", "currentFoodItems initialized as empty list");
         }
-        foodItemAdapter.notifyDataSetChanged();
+        
+        Log.d("BurgerRestaurant", "Filtered items count: " + currentFoodItems.size());
+        
+        // 更新适配器数据并通知变化
+        if (foodItemAdapter != null) {
+            foodItemAdapter.updateData(currentFoodItems);
+            foodItemAdapter.notifyDataSetChanged();
+            Log.d("BurgerRestaurant", "Adapter data updated and notified");
+        } else {
+            Log.e("BurgerRestaurant", "foodItemAdapter is null");
+        }
     }
 
     private void updateCategoryUI(TextView selectedCategory) {

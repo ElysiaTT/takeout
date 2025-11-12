@@ -25,7 +25,6 @@ public class ProfileActivity extends AppCompatActivity {
     private TextView cacheSize;
     private LinearLayout changePasswordLayout;
     private LinearLayout orderHistoryLayout;
-    private LinearLayout notificationLayout;
     private LinearLayout clearCacheLayout;
 
     private UserManager userManager;
@@ -58,7 +57,6 @@ public class ProfileActivity extends AppCompatActivity {
         cacheSize = findViewById(R.id.cacheSize);
         changePasswordLayout = findViewById(R.id.changePasswordLayout);
         orderHistoryLayout = findViewById(R.id.orderHistoryLayout);
-        notificationLayout = findViewById(R.id.notificationLayout);
         clearCacheLayout = findViewById(R.id.clearCacheLayout);
     }
 
@@ -100,14 +98,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-        // 通知设置
-        notificationLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO: 集成极光推送后实现通知设置
-                Toast.makeText(ProfileActivity.this, "通知设置功能开发中...", Toast.LENGTH_SHORT).show();
-            }
-        });
+
 
         // 清除缓存
         clearCacheLayout.setOnClickListener(new View.OnClickListener() {

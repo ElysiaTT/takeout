@@ -25,6 +25,13 @@ public class FoodItemAdapter extends RecyclerView.Adapter<FoodItemAdapter.FoodVi
         this.foodItems = foodItems;
         this.listener = listener;
     }
+    
+    /**
+     * 更新菜品列表数据
+     */
+    public void updateData(List<FoodItem> newFoodItems) {
+        this.foodItems = newFoodItems;
+    }
 
     @NonNull
     @Override

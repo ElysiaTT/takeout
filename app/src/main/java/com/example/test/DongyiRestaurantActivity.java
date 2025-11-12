@@ -3,18 +3,20 @@ package com.example.test;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.database.sqlite.SQLiteDatabase;
+import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import com.example.test.FoodItem;
 
 public class DongyiRestaurantActivity extends AppCompatActivity {
 
@@ -24,6 +26,7 @@ public class DongyiRestaurantActivity extends AppCompatActivity {
     private List<FoodItem> allFoodItems;
     private List<FoodItem> currentFoodItems;
     private ShoppingCart shoppingCart;
+    private FoodDatabaseHelper databaseHelper;
 
     private TextView catNoodles, catMeals, catSteamedFried;
     private TextView currentSelectedCategory;
@@ -34,6 +37,7 @@ public class DongyiRestaurantActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dongyi_restaurant);
 
         shoppingCart = ShoppingCart.getInstance();
+        databaseHelper = new FoodDatabaseHelper(this);
 
         foodRecyclerView = findViewById(R.id.foodRecyclerView);
         cartButton = findViewById(R.id.cartButton);
@@ -57,119 +61,74 @@ public class DongyiRestaurantActivity extends AppCompatActivity {
 
         // 默认显示面食系列
         filterByCategory("面食系列");
+        
+
     }
 
     private void setupFoodItems() {
-        allFoodItems = new ArrayList<>();
-
-        // 板块1：面食系列
-        allFoodItems.add(new FoodItem("川味担担面",
-            "经典川味面食，芝麻酱香浓郁，花生碎增添口感，微辣开胃。",
-            4.00, "面食系列"));
-
-        allFoodItems.add(new FoodItem("武汉热干面",
-            "武汉特色早餐，芝麻酱拌面，劲道爽滑，配上榨菜丁和葱花。",
-            2.50, "面食系列"));
-
-        allFoodItems.add(new FoodItem("炸酱面",
-            "老北京风味，肉酱浓香，配黄瓜丝和豆芽，咸香适口。",
-            4.00, "面食系列"));
-
-        allFoodItems.add(new FoodItem("香辣牛肉卤面",
-            "精选牛肉块，卤汁浓郁，香辣入味，配软烂牛肉和青菜。",
-            12.00, "面食系列"));
-
-        allFoodItems.add(new FoodItem("牛肉拉面",
-            "手工拉制，面条劲道，牛肉汤底浓香，配炖煮牛肉片。",
-            6.00, "面食系列"));
-
-        // 板块2：套餐系列
-        allFoodItems.add(new FoodItem("叉烧套餐",
-            "广式叉烧，色泽红亮，甜咸适中，配米饭和时蔬，营养均衡。",
-            13.00, "套餐系列"));
-
-        allFoodItems.add(new FoodItem("烤鸡套餐",
-            "整只烤鸡腿，外焦里嫩，香气扑鼻，配米饭、青菜和例汤。",
-            12.00, "套餐系列"));
-
-        allFoodItems.add(new FoodItem("鸭腿套餐",
-            "卤制鸭腿，肉质鲜嫩，咸香入味，搭配米饭和时令蔬菜。",
-            10.00, "套餐系列"));
-
-        allFoodItems.add(new FoodItem("鸡腿套餐",
-            "香煎鸡腿，皮脆肉嫩，汁水丰富，配米饭、蔬菜和汤品。",
-            12.00, "套餐系列"));
-
-        allFoodItems.add(new FoodItem("鹅腿套餐",
-            "卤鹅腿，肉质紧实，香味浓郁，搭配米饭和小菜，饱腹感强。",
-            11.00, "套餐系列"));
-
-        allFoodItems.add(new FoodItem("孜然肉片套餐",
-            "孜然羊肉片，香辣可口，配洋葱青椒，附米饭和蔬菜。",
-            10.00, "套餐系列"));
-
-        allFoodItems.add(new FoodItem("鸡排套餐",
-            "炸鸡排，外酥里嫩，金黄诱人，配米饭、沙拉和玉米浓汤。",
-            10.00, "套餐系列"));
-
-        allFoodItems.add(new FoodItem("红烧肉套餐",
-            "家常红烧肉，肥而不腻，入口即化，色泽红亮，配米饭和青菜。",
-            15.00, "套餐系列"));
-
-        // 板块3：蒸炸系列
-        allFoodItems.add(new FoodItem("酥饼",
-            "传统武汉酥饼，层层酥脆，内馅咸香，刚出炉最好吃。",
-            2.00, "蒸炸系列"));
-
-        allFoodItems.add(new FoodItem("面窝",
-            "武汉特色小吃，外酥内软，中空造型，配豆浆最佳。",
-            2.00, "蒸炸系列"));
-
-        allFoodItems.add(new FoodItem("牛肉馅饼",
-            "现做现卖，牛肉馅料丰富，外皮金黄酥脆，肉汁饱满。",
-            4.00, "蒸炸系列"));
-
-        allFoodItems.add(new FoodItem("蒸饺",
-            "手工蒸饺，皮薄馅大，鲜香多汁，蘸醋更美味。",
-            5.00, "蒸炸系列"));
-
-        allFoodItems.add(new FoodItem("油条",
-            "传统早餐，炸至金黄，外酥内软，配豆浆或粥都好吃。",
-            2.00, "蒸炸系列"));
-
-        allFoodItems.add(new FoodItem("酱肉包",
-            "精选猪肉馅，酱香浓郁，皮薄馅多，热气腾腾。",
-            1.00, "蒸炸系列"));
-
-        allFoodItems.add(new FoodItem("粉条肉沫包",
-            "粉条配肉沫，口感丰富，咸鲜适口，物美价廉。",
-            1.00, "蒸炸系列"));
-
-        allFoodItems.add(new FoodItem("韭菜鸡蛋包",
-            "素馅包子，韭菜鸡蛋，鲜香扑鼻，清淡营养。",
-            0.80, "蒸炸系列"));
-
-        allFoodItems.add(new FoodItem("虾仁包",
-            "鲜虾仁馅，Q弹美味，皮软馅鲜，配料讲究。",
-            1.20, "蒸炸系列"));
-
-        allFoodItems.add(new FoodItem("蒸鸡蛋",
-            "嫩滑蒸蛋，入口即化，营养丰富，老少皆宜。",
-            0.80, "蒸炸系列"));
-
-        currentFoodItems = new ArrayList<>(allFoodItems);
+        try {
+            Log.d("DongyiRestaurant", "Starting setupFoodItems()");
+            // 从数据库获取所有菜品
+            allFoodItems = databaseHelper.getAllFoodItems(FoodDatabaseHelper.TABLE_DONGYI_FOOD);
+            Log.d("DongyiRestaurant", "Total food items retrieved: " + (allFoodItems != null ? allFoodItems.size() : "null"));
+            
+            // 初始化currentFoodItems
+            currentFoodItems = new ArrayList<>();
+            
+            // 确保foodItemAdapter已初始化
+            if (foodItemAdapter == null) {
+                setupRecyclerView();
+                Log.d("DongyiRestaurant", "Food adapter initialized");
+            }
+            
+            // 默认显示第一个分类的菜品
+            if (allFoodItems != null && !allFoodItems.isEmpty()) {
+                // 默认显示"面食系列"分类
+                Log.d("DongyiRestaurant", "Getting food items for category: 面食系列");
+                currentFoodItems = databaseHelper.getFoodItemsByCategory(FoodDatabaseHelper.TABLE_DONGYI_FOOD, "面食系列");
+                
+                // 确保currentFoodItems不为空
+                if (currentFoodItems == null) {
+                    currentFoodItems = new ArrayList<>();
+                    Log.d("DongyiRestaurant", "currentFoodItems initialized as empty list");
+                }
+                
+                // 更新适配器数据
+                if (foodItemAdapter != null) {
+                    foodItemAdapter.updateData(currentFoodItems);
+                    foodItemAdapter.notifyDataSetChanged();
+                    Log.d("DongyiRestaurant", "Adapter data updated and notified");
+                }
+            }
+        } catch (Exception e) {
+            Log.e("DongyiRestaurant", "Error setting up food items: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     private void setupRecyclerView() {
+        Log.d("DongyiRestaurant", "Setting up RecyclerView");
         foodRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        foodItemAdapter = new FoodItemAdapter(currentFoodItems, foodItem -> {
-            shoppingCart.addItem(foodItem);
-            Toast.makeText(DongyiRestaurantActivity.this,
-                foodItem.getName() + " 已加入购物车！",
-                Toast.LENGTH_SHORT).show();
-            updateCartButton();
+        
+        // 确保currentFoodItems不为空
+        if (currentFoodItems == null) {
+            currentFoodItems = new ArrayList<>();
+        }
+        
+        // 使用匿名内部类实现OnItemClickListener
+        foodItemAdapter = new FoodItemAdapter(currentFoodItems, new FoodItemAdapter.OnItemClickListener() {
+            @Override
+            public void onAddToCart(FoodItem foodItem) {
+                // 添加到购物车逻辑
+                shoppingCart.addItem(foodItem);
+                updateCartButton();
+                // 显示添加成功提示
+                Toast.makeText(DongyiRestaurantActivity.this, foodItem.getName() + " 已添加到购物车", Toast.LENGTH_SHORT).show();
+            }
         });
+        
         foodRecyclerView.setAdapter(foodItemAdapter);
+        Log.d("DongyiRestaurant", "RecyclerView setup completed");
     }
 
     private void setupCategoryNavigation() {
@@ -189,14 +148,88 @@ public class DongyiRestaurantActivity extends AppCompatActivity {
         });
     }
 
-    private void filterByCategory(String category) {
-        currentFoodItems.clear();
-        for (FoodItem item : allFoodItems) {
-            if (item.getCategory().equals(category)) {
-                currentFoodItems.add(item);
+    private void refreshFoodData() {
+        Log.d("DongyiRestaurant", "refreshFoodData: 开始刷新数据 (时间戳: " + System.currentTimeMillis() + ")");
+        try {
+            // 1. 记录当前选中的分类
+            String currentCategory = "面食系列"; // 默认分类
+            if (currentSelectedCategory != null) {
+                currentCategory = currentSelectedCategory.getText().toString();
+                Log.d("DongyiRestaurant", "当前选中的分类: " + currentCategory);
             }
+            
+            // 2. 直接从JSON加载数据，不依赖任何缓存
+            Log.d("DongyiRestaurant", "调用loadFoodFromJsonDirectly直接从JSON加载最新数据");
+            allFoodItems = databaseHelper.loadFoodFromJsonDirectly(FoodDatabaseHelper.TABLE_DONGYI_FOOD, "foods/dongyi_foods.json");
+            Log.d("DongyiRestaurant", "成功直接从JSON加载" + allFoodItems.size() + "条菜品数据");
+            
+            // 4. 记录菜品价格用于调试
+            if (allFoodItems != null && !allFoodItems.isEmpty()) {
+                for (FoodItem item : allFoodItems) {
+                    if (item.getName().contains("川味担担面")) {
+                        Log.d("DongyiRestaurant", "[川味担担面!] 当前价格: " + item.getPrice());
+                    }
+                    if (item.getName().contains("武汉热干面")) {
+                        Log.d("DongyiRestaurant", "[武汉热干面!] 当前价格: " + item.getPrice());
+                    }
+                }
+            }
+            
+            // 5. 根据当前分类筛选并刷新UI
+            Log.d("DongyiRestaurant", "根据分类" + currentCategory + "筛选菜品");
+            if (currentCategory.equals("面食系列") || currentCategory.equals("套餐系列") || currentCategory.equals("蒸炸系列")) {
+                filterByCategory(currentCategory);
+            } else {
+                filterByCategory("面食系列");
+            }
+            
+            // 6. 刷新RecyclerView
+            Log.d("DongyiRestaurant", "刷新RecyclerView");
+            if (foodItemAdapter != null) {
+                foodItemAdapter.notifyDataSetChanged();
+                Log.d("DongyiRestaurant", "RecyclerView已刷新");
+            }
+            
+            Log.d("DongyiRestaurant", "refreshFoodData: 数据刷新完成 (时间戳: " + System.currentTimeMillis() + ")");
+            Toast.makeText(this, "数据已更新，请检查菜品价格", Toast.LENGTH_SHORT).show();
+            
+        } catch (Exception e) {
+            Log.e("DongyiRestaurant", "刷新数据时出错: " + e.getMessage());
+            e.printStackTrace();
+            Toast.makeText(this, "刷新失败，请重试", Toast.LENGTH_SHORT).show();
         }
-        foodItemAdapter.notifyDataSetChanged();
+    }
+    
+    private void filterByCategory(String category) {
+        Log.d("DongyiRestaurant", "Filtering by category: " + category);
+        // 从数据库根据分类获取菜品
+        currentFoodItems = databaseHelper.getFoodItemsByCategory(FoodDatabaseHelper.TABLE_DONGYI_FOOD, category);
+        
+        // 确保currentFoodItems不为空
+        if (currentFoodItems == null) {
+            currentFoodItems = new ArrayList<>();
+            Log.d("DongyiRestaurant", "currentFoodItems initialized as empty list");
+        }
+        
+        Log.d("DongyiRestaurant", "Filtered items count: " + currentFoodItems.size());
+        
+        // 更新适配器数据并通知变化
+        if (foodItemAdapter != null) {
+            foodItemAdapter.updateData(currentFoodItems);
+            foodItemAdapter.notifyDataSetChanged();
+            Log.d("DongyiRestaurant", "Adapter data updated and notified");
+        } else {
+            Log.e("DongyiRestaurant", "foodItemAdapter is null");
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // 清理资源
+        if (databaseHelper != null) {
+            databaseHelper.close();
+        }
     }
 
     private void updateCategoryUI(TextView selectedCategory) {
@@ -224,6 +257,13 @@ public class DongyiRestaurantActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        Log.d("DongyiRestaurant", "onResume: 界面可见，直接从JSON重新加载最新数据");
+        
+        // 更新购物车按钮状态
         updateCartButton();
+        
+        // 每次进入界面都直接调用refreshFoodData方法
+        refreshFoodData();
+        Log.d("DongyiRestaurant", "onResume: 数据刷新完成");
     }
 }
